@@ -3,6 +3,7 @@
 
 #include "geometry/factories/SurfaceFactory.hpp"
 #include "geometry/kernel/Body.hpp"
+#include "io/writeOBJ.hpp"
 
 int main() {
 
@@ -18,6 +19,8 @@ int main() {
 
         bebe.saveOBJ("view_bebe.obj");
         bubu.saveOBJ("view_bubu.obj");
+        digamma::io::writeOBJ({bubu, bebe}, "view.obj");
+
     }
     catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
