@@ -6,8 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(Digamma main.cpp
         src/geometry/kernel/Surface.cpp
         src/geometry/kernel/Body.cpp
-        src/geometry/factories/SurfaceFactory.cpp)
+        src/geometry/factories/SurfaceFactory.cpp
+        src/physics/material/Atom.cpp
+        src/io/loadAtom.cpp)
+
+target_compile_options(Digamma PRIVATE /bigobj)
 
 target_include_directories(Digamma PRIVATE ./third_party/libigl/include
                                            ./include
-                                           ./third_party/eigen)
+                                           ./third_party/eigen
+                                           ./third_party/nlohmann_json/include
+                                           ./third_party/exprtk)
