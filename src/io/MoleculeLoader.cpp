@@ -12,7 +12,7 @@ physics::Molecule MoleculeLoader::loadJSON(const std::string& filename) {
     nlohmann::json j;
     f >> j;
 
-    std::vector<physics::Component> comps;
+    std::vector<physics::Molecule::Component> comps;
     for (auto& c : j.at("composition")) {
 
         std::string elem = c.at("element");

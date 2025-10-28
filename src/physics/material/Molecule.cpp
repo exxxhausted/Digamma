@@ -11,7 +11,7 @@ Molecule::Molecule(std::string name, std::vector<Component> components) :
 
 const std::string& Molecule::name() const { return name_; }
 
-const std::vector<Component>& Molecule::components() const { return components_; }
+const std::vector<Molecule::Component>& Molecule::components() const { return components_; }
 
 double Molecule::sigmaPhoto(double E) const {
     double sum = 0.0;

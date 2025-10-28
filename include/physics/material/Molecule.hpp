@@ -5,13 +5,13 @@
 
 namespace digamma::physics {
 
-struct Component {
-    Atom atom;
-    int count;
-};
-
 class Molecule {
 public:
+    struct Component {
+        Atom atom;
+        int count;
+    };
+
     Molecule(const std::string&);
     Molecule(std::string name, std::vector<Component> components);
     const std::string& name() const;
