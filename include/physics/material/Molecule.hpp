@@ -13,15 +13,19 @@ public:
     };
 
     Molecule(const std::string&);
-    Molecule(std::string name, std::vector<Component> components);
+    Molecule(std::string name, double mass, std::vector<Component> components);
     const std::string& name() const;
+    double mass() const;
     const std::vector<Component>& components() const;
-    double sigmaPhoto(double E) const;
-    double sigmaCompton(double E) const;
-    double sigmaPair(double E) const;
-    double sigmaTotal(double E) const;
+    double sigmaPhoto(double MeV) const;
+    double sigmaCompton(double MeV) const;
+    double sigmaPair(double MeV) const;
+    double sigmaTotal(double MeV) const;
+
 private:
+
     std::string name_;
+    double mass_;
     std::vector<Component> components_;
 };
 

@@ -4,8 +4,7 @@
 #include "geometry/factories/SurfaceFactory.hpp"
 #include "geometry/kernel/Body.hpp"
 #include "io/writeOBJ.hpp"
-#include "physics/material/Atom.hpp"
-#include "physics/material/Molecule.hpp"
+#include "physics/material/Material.hpp"
 
 using namespace digamma;
 using namespace geometry;
@@ -14,7 +13,8 @@ using namespace io;
 int main() {
     try {
 
-        auto NaI = physics::Molecule("NaI");
+        auto NaI = physics::Material("NaI");
+
         std::cout << NaI.sigmaPhoto(0.662) / NaI.sigmaTotal(0.662) << std::endl;
         std::cout << NaI.sigmaCompton(0.662) / NaI.sigmaTotal(0.662) << std::endl;
         std::cout << NaI.sigmaPair(0.662) / NaI.sigmaTotal(0.662) << std::endl;

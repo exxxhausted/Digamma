@@ -10,7 +10,10 @@ add_executable(Digamma main.cpp
         src/physics/material/Atom.cpp
         src/io/AtomLoader.cpp
         src/physics/material/Molecule.cpp
-        src/io/MoleculeLoader.cpp)
+        src/io/MoleculeLoader.cpp
+        src/io/MaterialLoader.cpp
+        src/physics/material/Material.cpp
+)
 
 target_compile_options(Digamma PRIVATE /bigobj)
 
