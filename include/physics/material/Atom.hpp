@@ -21,9 +21,10 @@ public:
     const std::string& symbol() const;
     int Z() const;
     double A() const;
-    double sigma_photo(double E) const;
-    double sigma_compton(double E) const;
-    double sigma_pair(double E) const;
+    double sigmaPhoto(double E) const;
+    double sigmaCompton(double E) const;
+    double sigmaPair(double E) const;
+    double sigmaTotal(double E) const;
 
 private:
 

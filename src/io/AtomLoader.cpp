@@ -6,8 +6,7 @@ namespace digamma::io {
 
 physics::Atom AtomLoader::loadJSON(const std::string& filename) {
     std::ifstream f(filename);
-    if (!f)
-        throw std::runtime_error("AtomLoader: cannot open " + filename);
+    if (!f) throw std::runtime_error("AtomLoader: cannot open " + filename);
     nlohmann::json j;
     f >> j;
 

@@ -24,11 +24,12 @@ int Atom::Z() const { return Z_; }
 
 double Atom::A() const { return A_; }
 
-double Atom::sigma_photo(double E) const { return photo_(E); }
+double Atom::sigmaPhoto(double E) const { return photo_(E); }
 
-double Atom::sigma_compton(double E) const { return compton_(E); }
+double Atom::sigmaCompton(double E) const { return compton_(E); }
 
-double Atom::sigma_pair(double E) const { return pair_(E); }
+double Atom::sigmaPair(double E) const { return pair_(E); }
 
+double Atom::sigmaTotal(double E) const { return sigmaPhoto(E) + sigmaCompton(E) + sigmaPair(E); }
 
 }
