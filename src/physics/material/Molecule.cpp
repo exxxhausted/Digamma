@@ -15,42 +15,26 @@ const std::vector<Component>& Molecule::components() const { return components_;
 
 double Molecule::sigmaPhoto(double E) const {
     double sum = 0.0;
-    size_t count_sum = 0;
-    for (const auto& c : components_) {
-        sum += c.count * c.atom.sigmaPhoto(E);
-        count_sum += c.count;
-    }
-    return count_sum ? sum / count_sum : 0.0;
+    for (const auto& c : components_) sum += c.count * c.atom.sigmaPhoto(E);
+    return sum;
 }
 
 double Molecule::sigmaCompton(double E) const {
     double sum = 0.0;
-    size_t count_sum = 0;
-    for (const auto& c : components_) {
-        sum += c.count * c.atom.sigmaCompton(E);
-        count_sum += c.count;
-    }
-    return count_sum ? sum / count_sum : 0.0;
+    for (const auto& c : components_) sum += c.count * c.atom.sigmaCompton(E);
+    return sum;
 }
 
 double Molecule::sigmaPair(double E) const {
     double sum = 0.0;
-    size_t count_sum = 0;
-    for (const auto& c : components_) {
-        sum += c.count * c.atom.sigmaPair(E);
-        count_sum += c.count;
-    }
-    return count_sum ? sum / count_sum : 0.0;
+    for (const auto& c : components_) sum += c.count * c.atom.sigmaPair(E);
+    return sum;
 }
 
 double Molecule::sigmaTotal(double E) const {
     double sum = 0.0;
-    size_t count_sum = 0;
-    for (const auto& c : components_) {
-        sum += c.count * c.atom.sigmaTotal(E);
-        count_sum += c.count;
-    }
-    return count_sum ? sum / count_sum : 0.0;
+    for (const auto& c : components_) sum += c.count * c.atom.sigmaTotal(E);
+    return sum;
 }
 
 
