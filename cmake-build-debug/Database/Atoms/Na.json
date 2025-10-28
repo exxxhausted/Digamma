@@ -1,0 +1,10 @@
+{
+  "symbol": "Na",
+  "Z": 11,
+  "A": 22.99,
+  "cross_sections": {
+    "photo":   { "type": "formula", "expr": "1.2e-22 * ((0.1 / E) ^ 3)" },
+    "compton": { "type": "formula", "expr": "3.5e-24 * (1.0 + 0.05 / E)" },
+    "pair":    { "type": "formula", "expr": "(E > 1.022) ? (5e-26 * (E - 1.022)) : (0.0)" }
+  }
+}
