@@ -8,7 +8,7 @@ add_executable(Digamma main.cpp
         src/geometry/kernel/Body.cpp
         src/geometry/factories/SurfaceFactory.cpp
         src/physics/material/Atom.cpp
-        src/io/loadAtom.cpp)
+        src/io/AtomLoader.cpp)
 
 target_compile_options(Digamma PRIVATE /bigobj)
 

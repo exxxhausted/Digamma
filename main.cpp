@@ -4,7 +4,6 @@
 #include "geometry/factories/SurfaceFactory.hpp"
 #include "geometry/kernel/Body.hpp"
 #include "io/writeOBJ.hpp"
-#include "io/loadAtom.hpp"
 #include "physics/material/Atom.hpp"
 
 using namespace digamma;

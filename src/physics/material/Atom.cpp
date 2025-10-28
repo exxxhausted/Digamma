@@ -1,9 +1,9 @@
 #include "physics/material/Atom.hpp"
-#include "io/loadAtom.hpp"
+#include "io/AtomLoader.hpp"
 
 namespace digamma::physics {
 
-Atom::Atom(const std::string& symb) :  Atom(io::loadAtom("./Database/Atoms/" + symb + ".json")) {}
+Atom::Atom(const std::string& symb) :  Atom(std::move(io::AtomLoader::loadJSON("./Database/Atoms/" + symb + ".json"))) {}
 
 Atom::Atom(std::string symbol,
            int z,
