@@ -1,25 +1,22 @@
 #ifndef DIGAMMA_SURFACE_HPP
 #define DIGAMMA_SURFACE_HPP
 
-#include "geometry/interfaces/Serializable.hpp"
-#include "geometry/interfaces/Transformable.hpp"
-
 #include <utility>
+
+#include "Aliases.hpp"
 
 namespace digamma::geometry {
 
-class Surface : public Serializable,
-                public Transformable
-{
+class Surface {
 public:
 
     Surface(const Eigen::MatrixXd& vertices, const Eigen::MatrixXi& faces);
 
-    void translate(const Vector& translation) override;
-    void rotate(double angle_rad, const Vector& axis) override;
-    void scale(double factor) override;
+    void translate(const Vector& translation);
+    void rotate(double angle_rad, const Vector& axis);
+    void scale(double factor);
 
-    void saveOBJ(const std::string& filename) const override;
+    std::size_t saveOBJ(const std::string& filename, std::size_t offset = 0) const;
 
     double area() const;
 

@@ -1,9 +1,10 @@
 #include "geometry/kernel/Body.hpp"
+#include "io/writeOBJ.hpp"
 
 #include <igl/orientable_patches.h>
 #include <igl/orient_outward.h>
 #include <igl/winding_number.h>
-
+#include <fstream>
 
 namespace digamma::geometry {
 
@@ -46,7 +47,13 @@ void Body::rotate(double angle, const Vector& axis) { boundary_.rotate(angle, ax
 
 void Body::scale(double scale) { boundary_.scale(scale); }
 
-void Body::saveOBJ(const std::string& filename) const { boundary_.saveOBJ(filename); }
+std::size_t Body::saveOBJ(const std::string& filename, std::size_t offset) const {
+    std::ofstream os(filename, std::ios::app);
+    if (!os) throw std::runtime_error("Failed to save OBJ: " + filename);
+    os << "o body" << "\n";
+    const auto& [vertices, faces] = boundary_.data();
+    return io::writeOBJ(vertices, faces, os, offset);
+}
 
 bool Body::contains(const Point& point) const {
     const auto& [vertices, faces] = boundary_.data();

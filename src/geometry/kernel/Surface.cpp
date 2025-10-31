@@ -1,8 +1,8 @@
 #include "geometry/kernel/Surface.hpp"
+#include "io/writeOBJ.hpp"
 
 #include <Eigen/Geometry>
-#include <igl/readOBJ.h>
-#include <igl/writeOBJ.h>
+#include <fstream>
 #include <igl/doublearea.h>
 #include <igl/boundary_facets.h>
 
@@ -22,10 +22,11 @@ void Surface::rotate(double angle_rad, const Vector& axis) {
 
 void Surface::scale(double factor) { vertices_ *= factor; }
 
-void Surface::saveOBJ(const std::string& filename) const {
-    if (!igl::writeOBJ(filename, vertices_, faces_)) {
-        throw std::runtime_error("Failed to save OBJ: " + filename);
-    }
+std::size_t Surface::saveOBJ(const std::string& filename, std::size_t offset) const {
+    std::ofstream os(filename, std::ios::app);
+    if (!os) throw std::runtime_error("Failed to save OBJ: " + filename);
+    os << "o surface" << "\n";
+    return io::writeOBJ(vertices_, faces_, os, offset);
 }
 
 double Surface::area() const {

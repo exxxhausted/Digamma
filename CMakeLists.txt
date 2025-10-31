@@ -13,6 +13,8 @@ add_executable(Digamma main.cpp
         src/io/MoleculeLoader.cpp
         src/io/MaterialLoader.cpp
         src/physics/material/Material.cpp
+        src/geometry/kernel/Ray.cpp
+        src/io/writeOBJ.cpp
 )
 
 target_compile_options(Digamma PRIVATE /bigobj)

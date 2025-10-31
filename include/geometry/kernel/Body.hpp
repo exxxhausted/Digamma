@@ -5,18 +5,16 @@
 
 namespace digamma::geometry {
 
-class Body : public Serializable,
-             public Transformable
-{
+class Body {
 public:
 
     explicit Body(const Surface& boundary);
 
-    void translate(const Vector& translation) override;
-    void rotate(double angle_rad, const Vector& axis) override;
-    void scale(double factor) override;
+    void translate(const Vector& translation);
+    void rotate(double angle_rad, const Vector& axis);
+    void scale(double factor);
 
-    void saveOBJ(const std::string& filename) const override;
+    std::size_t saveOBJ(const std::string& filename, std::size_t offset = 0) const;
 
     bool contains(const Point&) const;
     double area() const;
