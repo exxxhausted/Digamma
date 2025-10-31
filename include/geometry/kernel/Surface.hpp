@@ -2,8 +2,11 @@
 #define DIGAMMA_SURFACE_HPP
 
 #include <utility>
+#include <optional>
 
 #include "Aliases.hpp"
+#include "Ray.hpp"
+#include "geometry/intersection/IntersectionResult.hpp"
 
 namespace digamma::geometry {
 
@@ -23,6 +26,8 @@ public:
     auto data() const -> std::pair<const Eigen::MatrixXd&, const Eigen::MatrixXi&>;
 
     bool isClosed() const;
+
+    std::optional<IntersectionResult> intersect(const Ray& ray) const;
 
 private:
 

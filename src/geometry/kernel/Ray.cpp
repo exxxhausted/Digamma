@@ -10,4 +10,6 @@ Point Ray::source() const { return source_; }
 
 Vector Ray::direction() const { return direction_; }
 
+void Ray::moveSource(double l) { source_ += l * direction_; }
+
 }

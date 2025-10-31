@@ -12,6 +12,7 @@ public:
     Point pointAt(double) const;
     Point source() const;
     Vector direction() const;
+    void moveSource(double l);
 
 private:
     Point source_;
