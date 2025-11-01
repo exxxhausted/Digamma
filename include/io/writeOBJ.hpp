@@ -7,6 +7,7 @@
 #include <initializer_list>
 #include <concepts>
 #include <Eigen/Core>
+#include <fstream>
 
 namespace digamma::io {
 
@@ -16,17 +17,18 @@ std::size_t writeOBJ(const Eigen::MatrixXd& V,
     std::size_t offset = 0);
 
 template <typename T>
-concept HasSaveOBJ = requires(const T t, const std::string& filename, std::size_t offset) {
-    { t.saveOBJ(filename, offset) } -> std::same_as<std::size_t>;
+concept HasWriteOBJ = requires(const T t, std::ofstream& os, std::size_t offset) {
+    { t.writeOBJ(os, offset) } -> std::same_as<std::size_t>;
 };
 
-template <HasSaveOBJ T>
+template <HasWriteOBJ T>
 std::size_t saveOBJ(const std::vector<T>& vec, const std::string& filename, std::size_t offset = 0) {
-    for (const auto& t : vec) offset += t.saveOBJ(filename, offset);
+    std::ofstream os(filename);
+    for (const auto& t : vec) offset += t.writeOBJ(os, offset);
     return offset;
 }
 
-template <HasSaveOBJ T>
+template <HasWriteOBJ T>
 std::size_t saveOBJ(const std::initializer_list<T>& list, const std::string& filename, std::size_t offset = 0) {
     return saveOBJ(std::vector(list), filename, offset);
 }

@@ -14,6 +14,7 @@ public:
     const std::string& name() const;
     const geometry::Body& body() const;
     const Material& material() const;
+    std::optional<geometry::IntersectionResult> intersect(const geometry::Ray& ray) const;
 
 protected:
 

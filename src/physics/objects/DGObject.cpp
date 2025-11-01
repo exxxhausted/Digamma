@@ -10,4 +10,7 @@ const geometry::Body& DGObject::body() const { return body_; }
 
 const Material& DGObject::material() const { return material_; }
 
+std::optional<geometry::IntersectionResult> DGObject::intersect(const geometry::Ray &ray) const { return body_.intersect(ray); }
+
+
 }

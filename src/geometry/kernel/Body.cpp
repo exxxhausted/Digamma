@@ -4,6 +4,7 @@
 #include <igl/orientable_patches.h>
 #include <igl/orient_outward.h>
 #include <igl/winding_number.h>
+#include <igl/writeOBJ.h>
 #include <fstream>
 
 namespace digamma::geometry {
@@ -47,12 +48,16 @@ void Body::rotate(double angle, const Vector& axis) { boundary_.rotate(angle, ax
 
 void Body::scale(double scale) { boundary_.scale(scale); }
 
-std::size_t Body::saveOBJ(const std::string& filename, std::size_t offset) const {
-    std::ofstream os(filename, std::ios::app);
-    if (!os) throw std::runtime_error("Failed to save OBJ: " + filename);
+std::size_t Body::writeOBJ(std::ofstream& os, std::size_t offset) const {
     os << "o body" << "\n";
     const auto& [vertices, faces] = boundary_.data();
     return io::writeOBJ(vertices, faces, os, offset);
+}
+
+void Body::saveOBJ(const std::string& filename) const {
+    const auto& [vertices, faces] = boundary_.data();
+    auto res = igl::writeOBJ(filename, vertices, faces);
+    if (!res) throw std::runtime_error("Could not write OBJ file");
 }
 
 bool Body::contains(const Point& point) const {
@@ -76,4 +81,5 @@ double Body::volume() const {
 
 const Surface& Body::boundary() const { return boundary_; }
 
+std::optional<IntersectionResult> Body::intersect(const Ray& ray) const { return boundary_.intersect(ray); }
 }

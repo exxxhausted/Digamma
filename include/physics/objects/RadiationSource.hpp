@@ -4,6 +4,8 @@
 #include "DGObject.hpp"
 #include "physics/entities/Photon.hpp"
 
+#include <random>
+
 namespace digamma::physics {
 
 class RadiationSource : public DGObject {
@@ -20,9 +22,13 @@ private:
     Eigen::MatrixXd centers_;
     Eigen::MatrixXd areas_;
 
-
     std::size_t chooseRandomTriangle();
 
+    //cache
+    std::mt19937 gen_ = std::mt19937(std::random_device{}());
+    double total_area_;
+    std::uniform_real_distribution<double> dist_;
+    std::vector<double> cumulative_areas_;
 };
 
 }

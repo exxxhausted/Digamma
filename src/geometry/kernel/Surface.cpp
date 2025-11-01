@@ -7,6 +7,7 @@
 #include <igl/doublearea.h>
 #include <igl/boundary_facets.h>
 #include <igl/Hit.h>
+#include <igl/writeOBJ.h>
 
 namespace digamma::geometry {
 
@@ -24,9 +25,12 @@ void Surface::rotate(double angle_rad, const Vector& axis) {
 
 void Surface::scale(double factor) { vertices_ *= factor; }
 
-std::size_t Surface::saveOBJ(const std::string& filename, std::size_t offset) const {
-    std::ofstream os(filename, std::ios::app);
-    if (!os) throw std::runtime_error("Failed to save OBJ: " + filename);
+void Surface::saveOBJ(const std::string& filename) const {
+    auto res = igl::writeOBJ(filename, vertices_, faces_);
+    if (!res) throw std::runtime_error("Error writing OBJ file");
+}
+
+std::size_t Surface::writeOBJ(std::ofstream& os, std::size_t offset) const {
     os << "o surface" << "\n";
     return io::writeOBJ(vertices_, faces_, os, offset);
 }
@@ -34,7 +38,7 @@ std::size_t Surface::saveOBJ(const std::string& filename, std::size_t offset) co
 double Surface::area() const {
     Eigen::VectorXd face_areas;
     igl::doublearea(vertices_, faces_, face_areas);
-    return face_areas.sum() * 0.5;
+    return 0.5 * face_areas.sum();
 }
 
 auto Surface::data() const -> std::pair<const Eigen::MatrixXd&, const Eigen::MatrixXi&>

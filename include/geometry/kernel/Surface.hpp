@@ -19,7 +19,8 @@ public:
     void rotate(double angle_rad, const Vector& axis);
     void scale(double factor);
 
-    std::size_t saveOBJ(const std::string& filename, std::size_t offset = 0) const;
+    void saveOBJ(const std::string& filename) const;
+    std::size_t writeOBJ(std::ofstream& os, std::size_t offset = 0) const;
 
     double area() const;
 

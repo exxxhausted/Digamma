@@ -2,7 +2,6 @@
 
 #include <igl/per_face_normals.h>
 #include <igl/barycenter.h>
-#include <random>
 
 namespace digamma::physics {
 
@@ -19,22 +18,25 @@ RadiationSource::RadiationSource(std::string name,
     igl::barycenter(V, F, centers_);
     igl::doublearea(V, F, areas_);
     areas_ *= 0.5;
+    total_area_ = areas_.sum();
+    dist_ = std::uniform_real_distribution<>(0, total_area_);
+
+    cumulative_areas_.resize(areas_.size());
+    cumulative_areas_[0] = areas_(0);
+    for (int i = 1; i < areas_.size(); ++i) {
+        cumulative_areas_[i] = cumulative_areas_[i-1] + areas_(i);
+    }
 }
 
+
+
 std::size_t RadiationSource::chooseRandomTriangle() {
-    static std::mt19937 gen(std::random_device{}());
-    double total_area = areas_.sum();
-    std::uniform_real_distribution dist(0.0, total_area);
-    double r = dist(gen);
+    double r = dist_(gen_);
 
-    double accum = 0.0;
-    for (std::size_t i = 0; i < areas_.size(); ++i) {
-        accum += areas_(i);
-        if (r <= accum)
-            return i;
-    }
-
-    return areas_.size() - 1;
+    auto it = std::lower_bound(cumulative_areas_.begin(),
+                              cumulative_areas_.end(),
+                              r);
+    return std::distance(cumulative_areas_.begin(), it);
 }
 
 Photon RadiationSource::emitPhoton() {
