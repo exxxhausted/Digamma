@@ -36,6 +36,7 @@ add_executable(Digamma main.cpp
         src/physics/objects/RadiationSource.cpp
         src/geometry/intersection/AccelerationCache.cpp
         src/geometry/intersection/IntersectionResult.cpp
+        src/application/Scene.cpp
 )
 
 target_compile_options(Digamma PRIVATE /bigobj)
