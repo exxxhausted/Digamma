@@ -9,8 +9,10 @@ class Photon {
 public:
 
     Photon(geometry::Ray ray, double MeV);
-    double Energy() const;
+    double energy() const;
     geometry::Ray ray() const;
+    void move(double l);
+    void setEnergy(double MeV);
 
 private:
 

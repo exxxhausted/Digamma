@@ -5,6 +5,13 @@ set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
 
+FetchContent_Declare(matplotplusplus
+        GIT_REPOSITORY https://github.com/alandefreitas/matplotplusplus.git
+        GIT_TAG master
+)
+
+FetchContent_MakeAvailable(matplotplusplus)
+
 FetchContent_Declare(eigen
         URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 )
@@ -17,6 +24,7 @@ FetchContent_Declare(exprtk
 )
 
 FetchContent_MakeAvailable(eigen nlohmann_json exprtk)
+
 
 add_executable(Digamma main.cpp
         src/geometry/kernel/Surface.cpp
@@ -39,6 +47,7 @@ add_executable(Digamma main.cpp
         src/application/Scene.cpp
 )
 
+
 target_compile_options(Digamma PRIVATE /bigobj)
 
 target_include_directories(Digamma PRIVATE ./include
@@ -48,6 +57,5 @@ target_include_directories(Digamma PRIVATE ./include
         ./third_party/embree/include
         ./third_party/libigl/include)
 
-
 target_link_directories(Digamma PRIVATE ./third_party/embree/lib)
-target_link_libraries(Digamma PRIVATE embree4)
+target_link_libraries(Digamma PRIVATE embree4 matplot)

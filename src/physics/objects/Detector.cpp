@@ -1,23 +1,22 @@
 #include "physics/objects/Detector.hpp"
 
+#include <matplot/matplot.h>
+
 namespace digamma::physics {
 
 Detector::Detector(std::string name, geometry::Body body, Material material) :
     DGObject(std::move(name), std::move(body), std::move(material)){}
 
-void Detector::prepareForNextPhoton() {
-    delta_E_MeV_ = 0.0;
-    if (current_idx_ == uninitialized) {
-        current_idx_ = 0;
-    }
-    else {
-        ++current_idx_;
-        absorbed_energies_.emplace_back(delta_E_MeV_);
-    }
+void Detector::detectPhotonAbsorption(double MeV) {
+    absorbed_photons_.push_back(MeV);
 }
 
-void Detector::detectEnergyEmission(double MeV) { delta_E_MeV_ += MeV; }
-
-const std::vector<double>& Detector::rawData() const { return absorbed_energies_; }
+void Detector::showHistogram(std::size_t bins) {
+    matplot::hist(absorbed_photons_, bins);
+    matplot::xlabel("Energy (MeV)");
+    matplot::ylabel("Counts");
+    matplot::title("Photon absorption histogram");
+    matplot::show();
+}
 
 }

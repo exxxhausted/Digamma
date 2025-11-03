@@ -17,6 +17,8 @@ public:
     std::size_t writeOBJ(std::ofstream& os, std::size_t offset = 0) const;
     void saveOBJ(const std::string& filename) const;
 
+
+    // contains() dont work!!!
     bool contains(const Point&) const;
     double area() const;
     double volume() const;
