@@ -13,6 +13,7 @@ public:
     geometry::Ray ray() const;
     void move(double l);
     void setEnergy(double MeV);
+    void setDirection(geometry::Vector dir);
 
 private:
 

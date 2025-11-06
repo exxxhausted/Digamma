@@ -12,4 +12,6 @@ void Photon::move(double l) { ray_.moveSource(l); }
 
 void Photon::setEnergy(double MeV) { photon_energy_MeV_ = MeV; }
 
+void Photon::setDirection(geometry::Vector dir) { ray_ = geometry::Ray(ray_.source(), dir); }
+
 }

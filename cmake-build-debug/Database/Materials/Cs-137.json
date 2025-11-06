@@ -1,7 +1,0 @@
-{
-  "name": "Cs-137",
-  "density": 3.67,
-  "composition": [
-    { "molecule": "Cs-137", "mass_fraction": 1.0 }
-  ]
-}

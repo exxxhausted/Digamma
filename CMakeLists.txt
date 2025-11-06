@@ -25,7 +25,6 @@ FetchContent_Declare(exprtk
 
 FetchContent_MakeAvailable(eigen nlohmann_json exprtk)
 
-
 add_executable(Digamma main.cpp
         src/geometry/kernel/Surface.cpp
         src/geometry/kernel/Body.cpp
@@ -38,7 +37,7 @@ add_executable(Digamma main.cpp
         src/physics/material/Material.cpp
         src/geometry/kernel/Ray.cpp
         src/io/writeOBJ.cpp
-        src/physics/Objects/DGObject.cpp
+        src/physics/objects/DGObject.cpp
         src/physics/entities/Photon.cpp
         src/physics/objects/Detector.cpp
         src/physics/objects/RadiationSource.cpp
@@ -47,8 +46,7 @@ add_executable(Digamma main.cpp
         src/application/Scene.cpp
 )
 
-
-target_compile_options(Digamma PRIVATE /bigobj)
+target_compile_options(Digamma PRIVATE -Wall -Wextra)
 
 target_include_directories(Digamma PRIVATE ./include
         ${eigen_SOURCE_DIR}

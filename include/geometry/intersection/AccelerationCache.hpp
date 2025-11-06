@@ -2,6 +2,8 @@
 #define DIGAMMA_ACCELERATIONCACHE_HPP
 
 #include <igl/embree/EmbreeIntersector.h>
+#include <unordered_map>
+#include <memory>
 
 #include "geometry/kernel/Surface.hpp"
 
