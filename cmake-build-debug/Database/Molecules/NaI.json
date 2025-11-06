@@ -1,0 +1,7 @@
+{
+  "name": "NaI",
+  "composition": [
+    { "element": "Na", "count": 1 },
+    { "element": "I",  "count": 1 }
+  ]
+}

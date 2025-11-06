@@ -1,0 +1,7 @@
+{
+  "name": "NaI",
+  "density": 3.67,
+  "composition": [
+    { "molecule": "NaI", "mass_fraction": 1.0 }
+  ]
+}
