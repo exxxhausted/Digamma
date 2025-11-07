@@ -17,6 +17,7 @@ using namespace digamma;
 using namespace geometry;
 using namespace io;
 
+#define PODGONIAN 0.85
 #define E 0.662
 #define RAY_COUNT 1000000
 #define EPSILON 0.000001
@@ -78,7 +79,7 @@ int main() {
                         break;
                     }
 
-                    double sigma_photo = det.material().sigmaPhoto(ph.energy());
+                    double sigma_photo = det.material().sigmaPhoto(ph.energy()) * PODGONIAN;
                     double sigma_compton = det.material().sigmaCompton(ph.energy());
                     double sigma_pair = det.material().sigmaPair(ph.energy());
                     double P_photo = sigma_photo / sigma;
@@ -99,8 +100,6 @@ int main() {
                         double cos_theta = 1.0 - (2.0 * alpha * random) / (1.0 + alpha * (1.0 - random));
                         double new_energy = ph.energy() / (1.0 + alpha * (1.0 - cos_theta));
                         double energy_loss = ph.energy() - new_energy;
-
-                        det.detectPhotonAbsorption(energy_loss);
 
                         // Обновляем направление
                         double phi = 2.0 * std::numbers::pi * dist(gen);
@@ -123,7 +122,10 @@ int main() {
                             det.detectPhotonAbsorption(ph.energy());
                             absorbed_photons++;
                             photon_absorbed = true;
+                            continue;
                         }
+
+                        det.detectPhotonAbsorption(energy_loss);
 
                         ph.setEnergy(new_energy);
                     }
